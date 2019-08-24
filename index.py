@@ -23,11 +23,23 @@ def greatModel(input_shape):
 
     X = ZeroPadding2D((3, 3))(X_input)
 
-    X = Conv2D(32, (7, 7), strides=(1, 1), name='conv0')(X)
+    X = Conv2D(32, (5, 5), strides=(1, 1), name='conv0')(X)
     X = BatchNormalization(axis=3, name='bn0')(X)
     X = Activation('relu')(X)
 
-    X = MaxPooling2D((2, 2), name='max_pool')(X)
+    X = MaxPooling2D((2, 2), name='max_pool0')(X)
+
+    X = Conv2D(64, (3, 3), strides = (1, 1), name = 'conv1')(X)
+    X = BatchNormalization(axis = 3, name = 'bn1')(X)
+    X = Activation('relu')(X)
+
+    X = MaxPooling2D((2, 2), name='max_pool1')(X)
+
+    X = Conv2D(64, (3, 3), strides = (1, 1), name = 'conv2')(X)
+    X = BatchNormalization(axis = 3, name = 'bn2')(X)
+    X = Activation('relu')(X)
+
+    X = MaxPooling2D((2, 2), name='max_pool2')(X)
 
     X = Flatten()(X)
     X = Dense(10, activation='softmax', name='fc')(X)
